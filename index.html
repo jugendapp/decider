@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+    <title>Jugendapp Download-Decider</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: auto;
+            font-size: 150%;
+        }
+
+
+        :root {
+            --jugendapp-color: #c4debb;
+            --jugendapp-color2: #c4debb;
+            --jugendapp-color3: #c4debb;
+            --back-color: #ffffff;
+            --R: 500px;
+            --S: -500px;
+        }
+
+        .background{
+            background: var(--back-color);
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        
+        .blobs {
+            width: 50vh;
+            height: 50vh;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -5;
+            /* filter: contrast(30); */
+        }
+
+        .blobs .blob {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            position: absolute;
+            background-color: var(--jugendapp-color);
+            mix-blend-mode: multiply;
+            filter: blur(80px);
+        }
+
+        .blobs .blob.a {
+            background-color: #e6f0e1; /* mix(#c4debb, white, 80%) */
+            animation: circular2 40s linear infinite;
+        }
+
+        .blobs .blob.b {
+            background-color: #d4e3cc; /* mix(#c4debb, white, 50%) */
+            animation: circular 20s linear infinite;
+        }
+
+        .blobs .blob.c {
+            animation: circular 60s linear infinite;
+        }
+
+        @keyframes circular {
+            0% {
+                transform: translate(0, -150px);
+            }
+            25% {
+                transform: translate(150px, 0);
+            }
+            50% {
+                transform: translate(0, 150px);
+            }
+            75% {
+                transform: translate(-150px, 0);
+            }
+            100% {
+                transform: translate(0, -150px);
+            }
+        }
+
+        @keyframes circular2 {
+            0% {
+                transform: translate(0, 150px);
+            }
+            25% {
+                transform: translate(-150px, 0);
+            }
+            50% {
+                transform: translate(0, -150px);
+            }
+            75% {
+                transform: translate(150px, 0);
+            }
+            100% {
+                transform: translate(0, 150px);
+            }
+        }
+
+        @media screen and (orientation:portrait) {
+
+            .container{
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                width: 50vw;
+                height: 50vw;
+                border-radius: 50px;
+                box-shadow: 5px 10px 40px black;
+                /* bla */
+                background-color: rgba(255, 255, 255, 1);;
+                /* background-color: grey; */
+                background-blend-mode: lighten;
+                backdrop-filter: blur(100px);
+            }
+
+        }
+
+        @media screen and (orientation:landscape) {
+
+            .container{
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                width: 50vh;
+                height: 50vh;
+                border-radius: 50px;
+                box-shadow: 5px 10px 40px black;
+                /* bla */
+                background-color: rgba(255, 255, 255, 1);;
+                /* background-color: grey; */
+                backdrop-filter: blur(5px);
+            }
+
+        }
+
+        .container-content{
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .download-text{
+            width: 100%;
+            text-align: center;
+        }
+
+        .store-button{
+            position: relative;
+            border: none;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--jugendapp-color);
+            width: 50%;
+            height: 5vh;
+            font-size: 100%;
+        }
+
+        .store-button:hover{
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+<html>
+    <body class="background">
+
+        <div class="blobs">
+            <div class="blob a"></div>
+            <div class="blob b"></div>
+            <div class="blob c"></div>
+        </div>
+
+        <!-- <p id="demo"></p> -->
+
+        <div class="container">
+
+            <div class="container-content">
+
+                <p class="download-text">Falls du nicht automatisch weitergeleitet wirst, kannst du auch den butten hier drücken:</p>
+                <button class="store-button" onclick="decide()">App-Store</button>
+
+            </div>
+
+        </div>
+
+        <script>
+
+        let platform = navigator.userAgent.toLowerCase();
+        decide();
+
+        function decide() {
+            if (platform.includes("android")) {
+            // document.getElementById("demo").innerHTML = platform + " - weiterleiten zu playstore"
+            window.location.href = "market://details?id=com.tatentraeger.jugendinfo";
+            }
+
+            if (platform.includes("mac")) {
+                // document.getElementById("demo").innerHTML = platform + " - weiterleiten zu appstore"
+                window.location.href = "https://apps.apple.com/de/app/jugendapp/id916459921";
+            }
+
+            else {
+                //document.getElementById("demo").innerHTML = platform + " - irgend n anderer shit"
+            }
+        }
+        
+        </script>
+
+    </body>
+</html>
